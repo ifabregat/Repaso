@@ -1,0 +1,103 @@
+Ingenieria:
+    "Ingenium" -> engendrar, producir (estudio y aplicacion de tecnologia)
+    RAE -> conjunto de conocimientos con ciertas aplicaciones sobre un area para un fin
+    UBA -> conocimientos y los aplican a crear diversas cosas y ademas su fin es dar respuesta a desafios
+    
+    Patron: Conjunto de [conocimientos] aplicados en [acciones] de [areas] con un [fin]
+        [conocimientos] -> conocimientos cientificos, tecnicos y empiricos
+        [acciones]-> invencion, gestion, desarrollo, optimizacion, validacion
+        [areas]-> maquinaria, equipos, procesos, sistemas ...
+        [fin]-> solucionar un problema, satisfacer una necesidad
+
+Software:
+    Es la parte intangible de la computadora, sin embargo es mucho mas que eso
+
+    Concepto: conjunto de programas de computo, procedimientos, reglas, documentacion y datos asociados, que forman parte de las operaciones de un sistema de computacion
+
+    Sistemas -> pensados para dar servicios a otros programas
+    Aplicacion -> resuelven una necesidad especifica
+    Ingenieria o ciencias -> simulador de choques elasticos, mapa meteorologico
+    Embebido -> radios de los autos, gps, electrodomesticos inteligentes
+    IA -> gpt, copilot
+
+    Para que sea bueno:
+        Cumple su objetivo -> haga lo que me pidan
+        Puede ser utilizado -> no tarde mucho para cargar
+        Tiene buena performance -> que si pasa un evento no colapse
+        Es mantenible -> respetar las buenas practicas
+        Es confiable -> no genera duda al usarlas
+        Es seguro -> darle garantia que los datos estan en buenas manos
+
+Ingenieria de Software:
+    Hacer un esfuerzo por entender cual es probelma antes de comenzar con el desarrollo del software
+    La alta complejidad provoca que el diseño se convierta en una actividad crucial
+    El software debe tener alta calidad
+    Gana importancia de mantenimiento que debe tener el software
+
+    Consiste en aplicar Ingenieria al proceso completo de creacion de software. Desde el momento incial hasta el despliegue y mantenimiento del mismo
+
+    Incluye:
+        Comprender la necesidad
+        Organizar el desarrollo
+        Dieseñar el software
+        Implementarlo
+        Probarlo
+        Validarlo
+        Desplegarlo
+        Darle mantenimiento
+
+    Hoy en dia es iterativa e incremental -> voy haciendo pausas en el desarrollo para conseguir el "OK" del cliente
+
+Analisis de requerimientos:
+    Entender lo que el cliente quiere o necesita
+    Construir el producto adecuado
+    Comprender el alcance
+
+    Ing. de requerimientos:
+        Indagacion -> toma nota de la informacion que da el cliente
+        Negociacion -> no siempre se puede hacer lo que el cliente quiera
+        Especificacion -> paso a un formato para que los desarrolladores empiecen (no participa el cliente)
+        Validacion -> mostrarle al cliente la version
+    
+    Objetivos:
+        Describir lo que el cliente quiere
+        Establecer base para el diseño del software
+        Definir requerimientosque puedan ser validados
+
+Diseño:
+    Si la base es mala, mas adelante cuando crezca sera mucho mas peor
+
+    Requerimiento funcional -> lo que el cliente pidio
+    Requerimiento no funcional -> siempre esta pero no se menciona (corriendo todo el tiempo, cantidad de personas conectadas,  etc)
+
+Implentacion:
+    Pasos necesarios para pasar de los requerimientos a un producto funcional
+
+    Tiene que ser un proceso organizado
+
+Testing y validacion:
+    Demostrar al cliente que el software cumple los requerimientos (validacion)
+    Encontrar errores en el funcionamiento (verificacion)
+    Inspirar cambios en los requerimientos
+
+    Tipos de test:
+        Pruebas unitarias -> realizar pruebas individuales
+        Pruebas de integracion -> realizar una prueba integradora de todas las pruebas
+        UAT (User Acceptance Test) -> producto desarrollando, pruebas de validacion y lo valido con el cliente
+        Pruebas de usabilidad -> QA (Quality Assurance) verifica todos los ambitos del software
+
+Despliegue:
+    Lanzar el producto al publico
+
+    Entornos:
+        Development -> desarrolladores
+        QA -> asegrador de calidad
+        Preproduccion - Staggin -> cliente prueba el producto (antes de salir al publico)
+        Produccion -> abierto al publico
+
+Mantenimiento:
+    Realizar actualizaciones:
+        Surgen nuevos requerimientos
+        El software debe actualizarse para mantener la utilidad
+        Hay cambios en el negocio
+        Aparecen errores no detectados
