@@ -1,0 +1,71 @@
+Comandos basicos:
+    ls -> muestra todos los archivo dentro de la carpeta
+    ls -a -> muestra todos los archivos inclusive los ocultos
+    ls -la -> muestra todos los archivos inclusive los ocultos listados
+    cd -> cambia de directorio
+    cd .. -> va un directorio para atras
+    cd ~ -> va a la carpeta home
+    cd / -> va a la raiz del sistema
+    pwd -> muestra la ruta en donde estas
+    mkdir <nombre directorio> -> crea un directorio
+    rm <archivo> -> borra un archivo
+    rm -r <nombre directorio> -> borra un directorio y su contenido
+    cp <archivo> <destino> -> copia archivo o directorios
+    mv <archivo> <directorio> -> mueve archivos o directorios
+    mv <archivo> <archivo2> -> cambia el nombre de archivos o directorios
+    cat <archivo> -> muestra el contenido de un archivo
+    less <archivo> | more <archivo> -> muestra el contenido pagina por pagina
+    head <archivo> -> muestra las primeras lineas
+    tail <archivo> -> muestra las ultimas lineas
+    grep <palabra> <archivo> -> busca un patron en un archivo
+    curl url -> hace una peticion a un sitio web
+
+Variables de entorno:
+    export <NOMBRE DE LA VARIBALE>=<valor de la variable>
+    echo $NOMBRE -> imprime el valor de la variable NOMBRE
+    unset NOMBRE -> borra el valor de la variable NOMBRE
+    ~/.bashrc -> carpeta donde estan las variables de entorno
+
+Extensiones:
+    !! -> hace referencia a la ultima linea de codigo
+    '' -> se imprime sin ninguna modificacion (ejemplo: '$NOMBRE' -> $NOMBRE)
+    "" -> se imprime reemplazando los valores que puedan ser reemplazados
+    $() -> resuelve lo del parentesis
+    $(()) -> resuelve funciones aritmeticas
+    > -> manda lo que se mostraria en la terminal al archivo (pisa todo lo que tenga este mismo)
+    >> -> manda lo que se mostraria en la terminal al archivo agregandolo al final
+    < -> redirecciona la entrada y la toma como entrada para otro programa
+    | -> manda la salida de un programa al inicio de otro programa
+
+Scripts:
+    #!/bin/bash -> indico que voy a utilizar bash
+    # -> comentarios
+    $1, $2, $3, ... ,$n -> representacion de argumentos a pasar a un script
+    $@ -> tomo todo los parametros que hayan sido ingresados
+
+    -lt -> less than
+    -le -> less or equal
+    -gt -> greater than
+    -ge -> greater or equal
+    -a -> and
+    -o -> or
+
+    #
+        Usos:
+            [] -> necesita tener un espacio tanto inicio como final -> [ condicion ]
+            () -> necesita agregar otro pares dentro de parentesis donde ira la condicion -> ((condicion))
+    #
+
+    if [ condicion ]; then
+        lo que quiero ejecutar
+    else
+        lo otro que quiero ejecutar
+    fi
+
+    for [ i=0;i<num;i++] ; do
+        lo que quiero ejecutar
+    done
+
+    while [ condicion ]; do
+        lo que quiero ejecutar
+    done
