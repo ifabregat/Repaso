@@ -1,23 +1,45 @@
-git init -> crear un repositorio local
-git clone <url> -> clona un repositorio
-git add <archivo> -> agrega un archivo al staging area
-git rm <archivo> -> elimina un archivo del repositorio
-git rm --cached <archivo> -> saca al archivo del area de staging
-git restore --staged <archivo> -> saca al archivo del area de staging
-git commit -m "Mensaje" -> guarda los cambios en el repositorio con un mensaje descriptivo
-git commit -a -> guarda los cambios sin especificar mensaje
-git status -> muestra el estado del repositorio
-git log -> muestra el historial de commits realizados al repositorio
-git push -> sube los commits al repositorio
-git pull -> descarga los cambios del repositorio remoto y actualiza el local
-git fetch origin -> descarga los cambios del repositorio remoto sin aplicar cambios al local
-git branch <nombre de la rama> -> crea la rama
-git branch --list -> muestra la lista de ramas
-git branch --delete <nombre de la rama> -> elimina la rama
-git checkout <nombre de la rama> -> cambia a la rama
-git merge <rama> -> fusiona la rama actual con otra rama
-git diff -> muestra las diferencias entre las versiones
-git reset -> descarta confirmaciones y cambios realizados en el commit
-git stash <archivo> -> agrega los cambios a una lista de espera
-git stash list -> veo la lista de espera de esos cambios
-git stash pop <archvo> -> saco ese archivo de esa lista de espera
+Comandos git:
+    git init -> crear un repositorio local
+    git clone <url> -> clona un repositorio
+    git add <archivo> -> agrega un archivo al staging area
+    git rm <archivo> -> elimina un archivo del repositorio
+    git rm --cached <archivo> -> saca al archivo del area de staging
+    git restore --staged <archivo> -> saca al archivo del area de staging
+    git commit -m "Mensaje" -> guarda los cambios en el repositorio con un mensaje descriptivo
+    git commit -a -> guarda los cambios sin especificar mensaje
+    git status -> muestra el estado del repositorio
+    git log -> muestra el historial de commits realizados al repositorio
+    git push -> sube los commits al repositorio
+    git pull -> descarga los cambios del repositorio remoto y actualiza el local
+    git fetch origin -> descarga los cambios del repositorio remoto sin aplicar cambios al local
+    git branch <nombre de la rama> -> crea la rama
+    git branch --list -> muestra la lista de ramas
+    git branch --delete <nombre de la rama> -> elimina la rama
+    git checkout <nombre de la rama> -> cambia a la rama
+    git merge <rama> -> fusiona la rama actual con otra rama
+    git diff -> muestra las diferencias entre las versiones
+    git reset -> descarta confirmaciones y cambios realizados en el commit
+    git stash <archivo> -> agrega los cambios a una lista de espera
+    git stash list -> veo la lista de espera de esos cambios
+    git stash pop <archvo> -> saco ese archivo de esa lista de espera
+
+Github:
+    Tablero kanban:
+        permite identificar rapidamente distintas instancias por las cuales pasaria las tareas a destinar
+        aumenta la experiencia de desarrollo
+        aumenta la productividad
+        organizacion del proyecto
+
+    issues -> problemas / propuesta / solicitud
+
+    Templates issues -> plantilla determinada para que autocomplete ciertas cosas como descripcion, labels (se crea en la carpeta .github)
+
+    Titulo, descripcion, labels (etiqueta)
+
+    Pull request -> labels
+
+    Projects (board) -> columnas (Todo, In progress, Done) donde iran las tareas a realizar, se puede vincular los issues y pull request
+    
+    Field -> agregar campo (ejemplo prioridad)
+
+    Comentario del pull request -> Mensaje close#(tarea)
