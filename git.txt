@@ -20,4 +20,4 @@ git diff -> muestra las diferencias entre las versiones
 git reset -> descarta confirmaciones y cambios realizados en el commit
 git stash <archivo> -> agrega los cambios a una lista de espera
 git stash list -> veo la lista de espera de esos cambios
-git stash pop <archvo> -> saco ese archivo de esa lista de espera 
+git stash pop <archvo> -> saco ese archivo de esa lista de espera
