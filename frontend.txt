@@ -137,6 +137,12 @@ JavaScript:
             codigo;
         }
 
+    Peticiones (promesas):
+        fetch(<url>)
+            .then(response => response.json()) -> maneja la respuesta y la extrae en un archivo .json
+            .then(data => (console.log(data);)) -> imprime los datos tomados
+            .catch(error => (console.log("error: ",error);)) -> maneja el error y lo imprime
+
     HTML:
         alert() -> cartel de alerta
         confirm() -> cartel de confirmacion
