@@ -1,0 +1,159 @@
+HTML:
+    HyperText Markup Language (lenguaje de marcado de hipertexto) -> estructura de la pagina (que tiene que tener)
+
+    python3 -m http.server -> levanta un servidor que corra el archivo index.html en determinado puerto
+
+    html:5 -> estructura basica de html
+
+    <!DOCTYPE html> -> version de html (5)
+    <html lang="es">
+        <head>
+            <title> </title> -> titulo
+            <meta charset="utf-8"> -> codificacion de caracteres
+            <meta name="descripcion" content="texto">
+        </head>
+
+        <body>
+            <header>
+            </header>
+            <footer>
+            </footer>
+        </body>
+    </html>
+
+    <h1> al <h6> -> encabezados
+    <p> -> parrafo
+    <!-- comentario -->
+    <strong> -> negrita
+    <em> -> cursiva
+    <mark> -> resaltar
+    <ol> </ol> -> lista ordenada
+    <ul> </ul> -> lista desordenada
+    <li> </li> -> item de la lista
+    <img src="ruta/url" width="ancho(pixeles)" alt="descripcion">
+    <br> -> salto de linea
+    <a href="ruta/url" target="blanket"> </a> -> anclaje
+    <div> </div> -> contenedor para agrupar cosas
+    <nav> </nav> -> navegacion
+    <aside> </aside> -> contenido secundario
+    <section> </section> -> secciones
+    <article> </article> -> articulo
+    <table border="1"> </table> -> tabla
+    <tr> </tr> -> fila de la tabla
+    <td> </td> -> data de la tabla
+    <th> </th> -> data tipo encabezado de la tabla
+    <thead> </thead> -> parte superior de la tabla
+    <tbody> </tbody> -> parte del medio de la tabla
+    <tfoot> </tfoot> -> parte inferior de la tabla
+    <form action="/"> </form> -> formulario ; manda al inicio con action
+    <label id="id"> </label> -> etiqueta al input
+    <input id="id" type="tipo" name="nombre" value="" placeholder="texto de ejemplo" required>
+        tipos: {text, tel, email, checkbox, radio, submit, button}
+    <select> </select> -> selector de opcion
+    <option value="valor" selected> </option> -> opcion
+    <textarea placeholder="texto de ejemplo"> </textarea> -> caja de texto
+    <button type="submit"> </button> -> boton
+    <span> </span> -> contenedor de linea generico
+
+CSS:
+    <head>
+        <link rel="stylesheet" href="ruta">
+        <style>
+            selector {
+                propiedad: valor;
+            }
+        </style>
+    </head>
+
+    color: <color>; -> color de texto
+    background-color: <color>; -> color de fondo
+    text-align; <posicion>; -> alinea el texto
+    font-family: <fuente>, <otra fuente>; -> cambia la tipografia de la fuente
+    text-transform: <formato>; -> transforma al texto
+    font-size: <tamaño>; -> cambia el tamaño de la fuente(usar 'em')
+    font-weight: <tamaño>; -> cambia el grosor de la fuente
+    font-style: <estilo>; -> cambia el estilo de la fuente
+    text-decoration: <decoracion>; -> cambia la decoracion del texto
+    list-style: <estilo> -> cambia el estilo de la lista
+    # <nombre> {} -> modifica por id
+    . <nombre> {} -> modifica por class
+    <etiqueta> .<nombre> {} -> todas esas clase que esten dentro de la etiqueta
+    height: <tamaño>; -> modifica el alto
+    width: <tamaño>; -> modifica el ancho
+    border: <ancho> <tipo de borde> <color>; -> borde
+    border-radius: <tamaño>; -> borde circular
+    box-sizing: <valor>; -> tamaño totoal del elemento
+    margin-<direccion>: <tamaño>; -> establecer margen (espacio exterior)
+    padding-<direccion>: <tamaño>; -> establece espacio de relleno (espacio entre contenido y el borde)
+    display: <valor>; -> renderiza el tamaño segun el valor dado
+    cursor: <valor>; -> mostrara el tipo de cursor
+    transition: <propiedad> <duracion> <tiempo funcionando> <delay>; -> cuanto tiempo en efectuar algun cambio
+    <etiqueta> button:hover {} -> estilo que tendra el boton cuando pase el cursor por arriba
+
+JavaScript:
+    Tipado dinamico, debil e implicito (las variables pueden cambiar de valores, puede hacer operaciones de distintos tipos, no tenemos que aclarar tipo de variable)
+
+    Frameworks -> herramientas hechas sobre otra cosas que nos permiten hacer que nuestra pagina se haga ver mas linda sin tocar mucho
+        {bootstap, material, tailwind}
+
+    <body>
+        <script src="ruta">
+            codigo de JavaScript
+        </script>
+    </body>
+
+    // -> comentario
+    let NOMBRE = valor; -> asignacion de variables
+    const NOMBRE = valor; -> asignacion de constantes
+    console.log("texto a imprimir"); -> imprime cierto texto
+    parseInt(NUMERO); -> formatea para que sea un int
+    && -> operador y
+    || -> operador o
+    ! -> operador not
+    < -> menor
+    > -> mayor
+    === -> mas especifico (triple igual)
+    === -> menos especifico (doble igual)
+
+    Condicional:
+        if (condicion){
+            codigo;
+        }
+        else{
+            codigo;
+        }
+
+    Bucles:
+        while (condicion) {
+            codigo;
+        }
+
+        for (condicion) {
+            codigo;
+        }
+
+    Funciones:
+        function NOMBRE(parametro) {
+            codigo;
+        }
+
+    HTML:
+        alert() -> cartel de alerta
+        confirm() -> cartel de confirmacion
+        prompt() -> cartel de un input
+        `${NOMBRE}` -> formateo de strings y variables
+        <button onclick="funcion()"> </button> -> cuando se haga click ejecutara la funcion de JavaScript
+        NOMBRE.innerText -> muestra el contenido
+        NOMBRE.getAttribute("class") -> muestra los atributos de class
+        NOMBRE.value -> valor que tiene ese id
+        document.createElement(""etiqueta); -> crea un elemento
+        NOMBRE.append(valor) -> agrega al final el valor
+        setAttribute("nombre", valor); -> asigna el atributo dado con el siguiente valor
+        classList.add("valor"); -> agrega el valor a la clase
+        document.getElementById("id").value; -> toma todo el documento y guarda el valor de la etiqueta con ese id
+        document.getElementById("id").elements; -> toma todo el documento y guarda los elementos de la etiqueta con ese id
+            let elementos = document.getElementById("id").elements;
+            let dia = elementos.dia.value -> guarda el valor de dia del formulario
+            let animo = elementos.animo.value -> guarda el valor de animo
+
+
