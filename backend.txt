@@ -1,0 +1,88 @@
+Clientes:
+    Celular, navegador, otro servidor, comandos en la terminal, etc
+Servidores:
+    Pagina web, base de datos, aplicaciones (la nube es la computadora de otra persona)
+
+    Protocolos (como se comunica el cliente y el servidor):
+        Textuales -> FTP, SMTP, HTTP, HTTPS
+        Binarios -> Websocket
+
+curl -v -X <url>
+
+curl -v -X <url> | jless me formatea el .json
+
+HTTP:
+    Protocolo basado en texto
+    Request (solicitud) /Response (respuesta)
+    Extensible
+    Stateless (cada transaccion independiente a la anterior), not sessionless
+
+    Metodos:
+        GET -> cliente pide que devuelva un dato
+        HEAD -> identico al get pero sin el cuerpo en la respuesta
+        POST -> cliente envia informacion al servidor
+        PUT -> dada a una informacion ya dada poder modificarla
+        DELETE -> borrar esa informacion
+    
+    Estructura de un request/response:
+        { <metodo> <url> <version de protocolo> }
+        { request headers }
+        { general headers }
+        { representation headers }
+        { linea vacia }
+        { body }
+    
+    Codigos de estados:
+        100 - 199 -> respuestas informativas
+            { 100 -> continuar con la solicitud }
+        200 - 299 -> respuestas correctas
+            { 
+                200 -> ok
+                201 -> creado
+                202 -> aceptado
+                205 -> no hay contenido
+            }
+        300 - 399 -> respuestas de redireccion
+            {
+                300 -> multiple opciones
+                302 -> encontrado 
+            }
+        400 - 499 -> respuestas de error del cliente
+            {
+                400 -> solicitud mala
+                401 -> no esta autorizado
+                404 -> no encontrado
+                405 -> metodo no permitido
+                406 -> no aceptado
+            }
+        500 - 599 -> respuestas de error del servidor
+            {
+                500 -> error interno del servidor
+                502 -> puerta de enlace fallida
+            }
+
+Flask:
+    Endopoint -> es la ubicacion desde la API pueden acceder a los recursos que necesiten  
+
+    Instalar:
+        pip install virtualenv
+        virtualenv venv
+        source venv/bin/activate
+        pip install flask
+
+    Correr:
+        source venv/bin/activate
+        cd backend
+        flask run --debug
+        cd ../frontend
+        python3 -m http.server
+
+    Python:
+        from flask import Flask
+        app = flask(__name__)
+
+        @app.route("/") -> decorador -> provee informacion al programa de lo que sigue
+        def funcion(){
+            codigo
+            return
+        }
