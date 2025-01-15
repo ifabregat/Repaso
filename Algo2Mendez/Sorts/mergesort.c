@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void merge(void *vector, void *temp, int izq, int mitad, int der, size_t size,
 	   int (*cmp)(const void *, const void *))
@@ -13,39 +14,29 @@ void merge(void *vector, void *temp, int izq, int mitad, int der, size_t size,
 
 	while (i <= mitad && j <= der) {
 		if (cmp(v + i * size, v + j * size) <= 0) {
-			for (size_t l = 0; l < size; ++l) {
-				t[k * size + l] = v[i * size + l];
-			}
+			memcpy(t + k * size, v + i * size, size);
 			i++;
 		} else {
-			for (size_t l = 0; l < size; ++l) {
-				t[k * size + l] = v[j * size + l];
-			}
+			memcpy(t + k * size, v + j * size, size);
 			j++;
 		}
 		k++;
 	}
 
 	while (i <= mitad) {
-		for (size_t l = 0; l < size; ++l) {
-			t[k * size + l] = v[i * size + l];
-		}
+		memcpy(t + k * size, v + i * size, size);
 		i++;
 		k++;
 	}
 
 	while (j <= der) {
-		for (size_t l = 0; l < size; ++l) {
-			t[k * size + l] = v[j * size + l];
-		}
+		memcpy(t + k * size, v + j * size, size);
 		j++;
 		k++;
 	}
 
 	for (i = izq; i <= der; i++) {
-		for (size_t l = 0; l < size; ++l) {
-			v[i * size + l] = t[i * size + l];
-		}
+		memcpy(v + i * size, t + i * size, size);
 	}
 }
 
