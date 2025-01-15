@@ -2,41 +2,43 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef unsigned char byte;
+
 void merge(void *vector, void *temp, int izq, int mitad, int der, size_t size,
 	   int (*cmp)(const void *, const void *))
 {
+	byte *v = vector;
+	byte *t = temp;
+
 	int i = izq;
 	int j = mitad + 1;
 	int k = izq;
 
-	char *v = (char *)vector;
-	char *t = (char *)temp;
-
 	while (i <= mitad && j <= der) {
-		if (cmp(v + i * size, v + j * size) <= 0) {
-			memcpy(t + k * size, v + i * size, size);
+		if (cmp(&v[i * size], &v[j * size]) <= 0) {
+			memcpy(&t[k * size], &v[i * size], size);
 			i++;
 		} else {
-			memcpy(t + k * size, v + j * size, size);
+			memcpy(&t[k * size], &v[j * size], size);
 			j++;
 		}
 		k++;
 	}
 
 	while (i <= mitad) {
-		memcpy(t + k * size, v + i * size, size);
+		memcpy(&t[k * size], &v[i * size], size);
 		i++;
 		k++;
 	}
 
 	while (j <= der) {
-		memcpy(t + k * size, v + j * size, size);
+		memcpy(&t[k * size], &v[j * size], size);
 		j++;
 		k++;
 	}
 
-	for (i = izq; i <= der; i++) {
-		memcpy(v + i * size, t + i * size, size);
+	for (int l = izq; l <= der; l++) {
+		memcpy(&v[l * size], &t[l * size], size);
 	}
 }
 
