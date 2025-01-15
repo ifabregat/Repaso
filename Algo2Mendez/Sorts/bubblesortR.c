@@ -1,19 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef unsigned char byte;
+
 void intercambio(void *vector, int ml, int i, size_t size,
 		 int (*cmp)(const void *, const void *))
 {
 	if (i == ml - 1)
 		return;
 
-	char *v = (char *)vector;
+	byte *a = (byte *)vector + i * size;
+	byte *b = (byte *)vector + (i + 1) * size;
 
-	if (cmp(v + i * size, v + (i + 1) * size) > 0) {
-		for (size_t j = 0; j < size; ++j) {
-			char temp = v[i * size + j];
-			v[i * size + j] = v[(i + 1) * size + j];
-			v[(i + 1) * size + j] = temp;
+	if (cmp(a, b) > 0) {
+		for (size_t j = 0; j < size; j++) {
+			byte tmp = a[j];
+			a[j] = b[j];
+			b[j] = tmp;
 		}
 	}
 
