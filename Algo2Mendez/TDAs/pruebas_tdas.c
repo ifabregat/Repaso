@@ -2,6 +2,7 @@
 
 #include "lista.h"
 #include "cola.h"
+#include "pila.h"
 
 #include <string.h>
 
@@ -94,6 +95,25 @@ void pruebasCola()
 	cola_destruir(cola);
 }
 
+void pruebasPila()
+{
+	pila_t *pila = pila_crear();
+	pa2m_afirmar(pila_cantidad(pila) == 0,
+		     "La lista creada tiene 0 elementos");
+	int numero = 5;
+	pa2m_afirmar(pila_apilar(pila, &numero),
+		     "Se pudo agregar un elemento a la pila");
+	int numero2 = 10;
+	pa2m_afirmar(pila_apilar(pila, &numero2), "Se pudo agregar un elemento a la pila");
+	void *elemento = pila_tope(pila);
+	pa2m_afirmar(*(int *)elemento == 10, "El elemento del tope es el correcto");
+	elemento = pila_despilar(pila);
+	pa2m_afirmar(*(int *)elemento == 10, "El elemento desapilado es el correcto");
+	elemento = pila_tope(pila);
+	pa2m_afirmar(*(int *)elemento == 5, "El nuevo tope es el correcto");
+	pila_destruir(pila);
+}
+
 int main()
 {
 	pa2m_nuevo_grupo("Pruebas lista");
@@ -104,6 +124,7 @@ int main()
 	pruebasIteradorLista();
 	pa2m_nuevo_grupo("Pruebas cola");
 	pruebasCola();
-
+	pa2m_nuevo_grupo("Pruebas pila");
+	pruebasPila();
 	return pa2m_mostrar_reporte();
 }
