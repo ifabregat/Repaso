@@ -1,6 +1,7 @@
 #include "pa2m.h"
 
 #include "lista.h"
+#include "cola.h"
 
 #include <string.h>
 
@@ -74,6 +75,25 @@ void pruebasIteradorLista()
 	lista_destruir(lista);
 }
 
+void pruebasCola()
+{
+	cola_t *cola = cola_crear();
+	pa2m_afirmar(cola_cantidad(cola) == 0,
+		     "La lista creada tiene 0 elementos");
+	int numero = 5;
+	pa2m_afirmar(cola_encolar(cola, &numero),
+		     "Se pudo agregar un elemento a la cola");
+	int numero2 = 10;
+	pa2m_afirmar(cola_encolar(cola, &numero2), "Se pudo agregar un elemento a la cola");
+	void *elemento = cola_frente(cola);
+	pa2m_afirmar(*(int *)elemento == 5, "El elemento del frente es el correcto");
+	elemento = cola_desencolar(cola);
+	pa2m_afirmar(*(int *)elemento == 5, "El elemento desencolado es el correcto");
+	elemento = cola_frente(cola);
+	pa2m_afirmar(*(int *)elemento == 10, "El nuevo frente es el correcto");
+	cola_destruir(cola);
+}
+
 int main()
 {
 	pa2m_nuevo_grupo("Pruebas lista");
@@ -82,6 +102,8 @@ int main()
 	pruebasListaNulos();
 	printf("\n");
 	pruebasIteradorLista();
+	pa2m_nuevo_grupo("Pruebas cola");
+	pruebasCola();
 
 	return pa2m_mostrar_reporte();
 }
