@@ -3,6 +3,7 @@
 #include "lista.h"
 #include "cola.h"
 #include "pila.h"
+#include "abb.h"
 
 #include <string.h>
 
@@ -124,6 +125,64 @@ void pruebasPila()
 	pila_destruir(pila);
 }
 
+int cmp(void *e1, void *e2)
+{
+	return *(int *)e1 - *(int *)e2;
+}
+
+void pruebasABB()
+{
+	abb_t *abb = abb_crear(cmp);
+	pa2m_afirmar(abb != NULL, "Puedo crear un ABB");
+	int numero = 10;
+	pa2m_afirmar(abb_insertar(abb, &numero), "Puedo insertar un numero");
+	int numero2 = 5;
+	pa2m_afirmar(abb_insertar(abb, &numero2), "Puedo insertar otro numero");
+	int numero3 = 15;
+	pa2m_afirmar(abb_insertar(abb, &numero3), "Puedo insertar otro numero");
+	void *eliminado = NULL;
+	pa2m_afirmar(abb_quitar(abb, &numero2, &eliminado),
+		     "Puedo quitar un elemento del abb");
+	pa2m_afirmar(cmp(eliminado, &numero2) == 0,
+		     "El numero eliminado es el correcto");
+	abb_destruir(abb);
+}
+
+bool imprimir_elemento(void *elemento, void *ctx)
+{
+	printf("%i ", *(int *)elemento);
+	return true;
+}
+
+void pruebasIteradorABB()
+{
+	abb_t *abb = abb_crear(cmp);
+	int elemento1 = 50;
+	abb_insertar(abb, &elemento1);
+	int elemento2 = 54;
+	abb_insertar(abb, &elemento2);
+	int elemento3 = 20;
+	abb_insertar(abb, &elemento3);
+	int elemento4 = 10;
+	abb_insertar(abb, &elemento4);
+	int elemento5 = 30;
+	abb_insertar(abb, &elemento5);
+	int elemento6 = 15;
+	abb_insertar(abb, &elemento6);
+	int elemento7 = 60;
+	abb_insertar(abb, &elemento7);
+	size_t cantidad = abb_iterar_inorden(abb, imprimir_elemento, NULL);
+	printf("\n");
+	pa2m_afirmar(cantidad == 7, "Se puede iterar en inorden el ABB");
+	cantidad = abb_iterar_preorden(abb, imprimir_elemento, NULL);
+	printf("\n");
+	pa2m_afirmar(cantidad == 7, "Se puede iterar en preorden el ABB");
+	cantidad = abb_iterar_postorden(abb, imprimir_elemento, NULL);
+	printf("\n");
+	pa2m_afirmar(cantidad == 7, "Se puede iterar en postorden el ABB");
+	abb_destruir(abb);
+}
+
 int main()
 {
 	pa2m_nuevo_grupo("Pruebas lista");
@@ -136,5 +195,10 @@ int main()
 	pruebasCola();
 	pa2m_nuevo_grupo("Pruebas pila");
 	pruebasPila();
+	pa2m_nuevo_grupo("Pruebas ABB");
+	pruebasABB();
+	printf("\n");
+	pruebasIteradorABB();
+
 	return pa2m_mostrar_reporte();
 }
