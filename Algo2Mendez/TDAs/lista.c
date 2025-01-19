@@ -9,10 +9,10 @@ lista_t *lista_crear()
 	return lista;
 }
 
-void destruir_nodo(nodo_t *nodo, void (*destructor)(void *))
+void destruir_nodo(nodoL_t *nodo, void (*destructor)(void *))
 {
 	while (nodo) {
-		nodo_t *siguiente = nodo->siguiente;
+		nodoL_t *siguiente = nodo->siguiente;
 
 		if (destructor)
 			destructor(nodo->dato);
@@ -48,12 +48,12 @@ size_t lista_cantidad(lista_t *lista)
 	return lista->cantidad;
 }
 
-nodo_t *obtener_nodo(lista_t *lista, size_t posicion)
+nodoL_t *obtener_nodo(lista_t *lista, size_t posicion)
 {
 	if (!lista || posicion >= lista->cantidad)
 		return NULL;
 
-	nodo_t *anterior = lista->primer;
+	nodoL_t *anterior = lista->primer;
 	for (size_t i = 0; i < posicion; i++) {
 		anterior = anterior->siguiente;
 	}
@@ -61,7 +61,7 @@ nodo_t *obtener_nodo(lista_t *lista, size_t posicion)
 	return anterior;
 }
 
-bool alInicio(lista_t *lista, nodo_t *nodo)
+bool alInicio(lista_t *lista, nodoL_t *nodo)
 {
 	nodo->siguiente = lista->primer;
 	lista->primer = nodo;
@@ -72,7 +72,7 @@ bool alInicio(lista_t *lista, nodo_t *nodo)
 	return true;
 }
 
-bool alFinal(lista_t *lista, nodo_t *nodo)
+bool alFinal(lista_t *lista, nodoL_t *nodo)
 {
 	lista->ultimo->siguiente = nodo;
 	lista->ultimo = nodo;
@@ -80,9 +80,9 @@ bool alFinal(lista_t *lista, nodo_t *nodo)
 	return true;
 }
 
-bool otraPosicion(lista_t *lista, nodo_t *nodo, size_t posicion)
+bool otraPosicion(lista_t *lista, nodoL_t *nodo, size_t posicion)
 {
-	nodo_t *anterior = obtener_nodo(lista, posicion - 1);
+	nodoL_t *anterior = obtener_nodo(lista, posicion - 1);
 	if (!anterior)
 		return false;
 
@@ -97,7 +97,7 @@ bool lista_agregar(lista_t *lista, size_t posicion, void *elemento)
 	if (!lista || posicion > lista->cantidad)
 		return false;
 
-	nodo_t *nodoInsertar = calloc(1, sizeof(nodo_t));
+	nodoL_t *nodoInsertar = calloc(1, sizeof(nodoL_t));
 	if (!nodoInsertar)
 		return false;
 
@@ -134,13 +134,13 @@ bool lista_quitar(lista_t *lista, size_t posicion, void **eliminado)
 	if (!lista || posicion >= lista->cantidad)
 		return false;
 
-	nodo_t *nodoEliminar = NULL;
+	nodoL_t *nodoEliminar = NULL;
 
 	if (posicion == 0) {
 		nodoEliminar = lista->primer;
 		lista->primer = lista->primer->siguiente;
 	} else {
-		nodo_t *anterior = obtener_nodo(lista, posicion - 1);
+		nodoL_t *anterior = obtener_nodo(lista, posicion - 1);
 		if (!anterior)
 			return false;
 
@@ -164,7 +164,7 @@ void *lista_buscar(lista_t *lista, void *buscado, int (*cmp)(void *, void *))
 	if (!lista || !cmp)
 		return NULL;
 
-	nodo_t *actual = lista->primer;
+	nodoL_t *actual = lista->primer;
 	while (actual) {
 		if (cmp(actual->dato, buscado) == 0)
 			return actual->dato;
@@ -180,7 +180,7 @@ bool lista_obtener(lista_t *lista, size_t posicion, void **obtenido)
 	if (!lista || posicion >= lista->cantidad)
 		return false;
 
-	nodo_t *nodo = obtener_nodo(lista, posicion);
+	nodoL_t *nodo = obtener_nodo(lista, posicion);
 	if (!nodo)
 		return false;
 

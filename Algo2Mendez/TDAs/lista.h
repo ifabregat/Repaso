@@ -4,14 +4,14 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-typedef struct nodo {
+typedef struct nodoL {
 	void *dato;
-	struct nodo *siguiente;
-} nodo_t;
+	struct nodoL *siguiente;
+} nodoL_t;
 
 typedef struct lista {
-	nodo_t *primer;
-	nodo_t *ultimo;
+	nodoL_t *primer;
+	nodoL_t *ultimo;
 	size_t cantidad;
 } lista_t;
 
@@ -27,7 +27,7 @@ bool lista_obtener(lista_t *lista, size_t posicion, void **obtenido);
 bool lista_esta_vacia(lista_t *lista);
 
 typedef struct iterador {
-	nodo_t *elementoActual;
+	nodoL_t *elementoActual;
 } iterador_t;
 
 iterador_t *iterador_crear(lista_t *lista);
