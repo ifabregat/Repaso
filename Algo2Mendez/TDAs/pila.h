@@ -7,7 +7,7 @@
 #include "lista.h"
 
 typedef struct pila {
-    lista_t *lista;
+	lista_t *lista;
 } pila_t;
 
 pila_t *pila_crear();
