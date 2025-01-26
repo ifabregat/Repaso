@@ -182,99 +182,98 @@ size_t abb_cantidad(abb_t *abb)
 	return abb->cantidad;
 }
 
-size_t inorden_r(nodoA_t *nodo, bool (*f)(void *, void *), void *ctx, size_t *contador, bool *continuar)
+size_t inorden_r(nodoA_t *nodo, bool (*f)(void *, void *), void *ctx,
+		 size_t *contador, bool *continuar)
 {
-    if (!nodo || !(*continuar))
-        return *contador;
+	if (!nodo || !(*continuar))
+		return *contador;
 
-    inorden_r(nodo->izq, f, ctx, contador, continuar);
+	inorden_r(nodo->izq, f, ctx, contador, continuar);
 
-    if (!(*continuar))
-        return *contador;
+	if (!(*continuar))
+		return *contador;
 
-    if (!f(nodo->dato, ctx))
-    {
-        *continuar = false;
-        return *contador;
-    }
+	if (!f(nodo->dato, ctx)) {
+		*continuar = false;
+		return *contador;
+	}
 
-    (*contador)++;
+	(*contador)++;
 
-    inorden_r(nodo->der, f, ctx, contador, continuar);
+	inorden_r(nodo->der, f, ctx, contador, continuar);
 
-    return *contador;
+	return *contador;
 }
-
 
 size_t abb_iterar_inorden(abb_t *abb, bool (*f)(void *, void *), void *ctx)
 {
-    if (!abb || !abb->raiz || !f)
-        return 0;
+	if (!abb || !abb->raiz || !f)
+		return 0;
 
-    size_t contador = 0;
-    bool continuar = true;
+	size_t contador = 0;
+	bool continuar = true;
 
-    inorden_r(abb->raiz, f, ctx, &contador, &continuar);
-    return contador;
+	inorden_r(abb->raiz, f, ctx, &contador, &continuar);
+	return contador;
 }
 
-
-size_t preorden_r(nodoA_t *nodo, bool (*f)(void *, void *), void *ctx, size_t *contador, bool *continuar)
+size_t preorden_r(nodoA_t *nodo, bool (*f)(void *, void *), void *ctx,
+		  size_t *contador, bool *continuar)
 {
-    if (!nodo || !(*continuar))
-        return *contador;
+	if (!nodo || !(*continuar))
+		return *contador;
 
-    (*contador)++;
+	(*contador)++;
 
-    if (!f(nodo->dato, ctx))
-    {
-        *continuar = false;
-        return *contador;
-    }
+	if (!f(nodo->dato, ctx)) {
+		*continuar = false;
+		return *contador;
+	}
 
-    preorden_r(nodo->izq, f, ctx, contador, continuar);
-    preorden_r(nodo->der, f, ctx, contador, continuar);
+	preorden_r(nodo->izq, f, ctx, contador, continuar);
+	preorden_r(nodo->der, f, ctx, contador, continuar);
 
-    return *contador;
+	return *contador;
 }
 
 size_t abb_iterar_preorden(abb_t *abb, bool (*f)(void *, void *), void *ctx)
 {
-    if (!abb || !abb->raiz || !f)
-        return 0;
+	if (!abb || !abb->raiz || !f)
+		return 0;
 
-    size_t contador = 0;
-    bool continuar = true;
+	size_t contador = 0;
+	bool continuar = true;
 
-    return preorden_r(abb->raiz, f, ctx, &contador, &continuar);
+	return preorden_r(abb->raiz, f, ctx, &contador, &continuar);
 }
 
-size_t postorden_r(nodoA_t *nodo, bool (*f)(void *, void *), void *ctx, size_t *contador, bool *continuar)
+size_t postorden_r(nodoA_t *nodo, bool (*f)(void *, void *), void *ctx,
+		   size_t *contador, bool *continuar)
 {
-    if (!nodo || !(*continuar))
-        return *contador;
+	if (!nodo || !(*continuar))
+		return *contador;
 
-    postorden_r(nodo->izq, f, ctx, contador, continuar);
-    postorden_r(nodo->der, f, ctx, contador, continuar);    
+	postorden_r(nodo->izq, f, ctx, contador, continuar);
+	postorden_r(nodo->der, f, ctx, contador, continuar);
 
-    if (!(*continuar))
-        return *contador;
+	if (!(*continuar))
+		return *contador;
 
-    (*contador)++;
+	(*contador)++;
 
-    if (!f(nodo->dato, ctx))
-        *continuar = false;
+	if (!f(nodo->dato, ctx))
+		*continuar = false;
 
-    return *contador;
+	return *contador;
 }
 
 size_t abb_iterar_postorden(abb_t *abb, bool (*f)(void *, void *), void *ctx)
 {
-    if (!abb || !abb->raiz || !f)
-        return 0;
+	if (!abb || !abb->raiz || !f)
+		return 0;
 
-    size_t contador = 0;
-    bool continuar = true;
+	size_t contador = 0;
+	bool continuar = true;
 
-    return postorden_r(abb->raiz, f, ctx, &contador, &continuar);    
+	return postorden_r(abb->raiz, f, ctx, &contador, &continuar);
 }
