@@ -5,6 +5,7 @@
 #include "pila.h"
 #include "abb.h"
 #include "hash_a.h"
+#include "hash_c.h"
 
 void pruebasLista()
 {
@@ -249,6 +250,67 @@ void pruebasIteradorHashAbierto()
 	hash_destruir(hash, NULL);
 }
 
+void pruebasHashCerrado()
+{
+	hash_c_t *hash = hashC_crear(10);
+	pa2m_afirmar(hash != NULL, "Puedo crear un hash cerrado");
+	pa2m_afirmar(hashC_cantidad(hash) == 0, "El hash tiene 0 elementos");
+	int numero = 10;
+	void *encontrado = NULL;
+	pa2m_afirmar(hashC_insertar(hash, "diez", &numero, &encontrado),
+		     "Puedo insertar un elemento en el hash");
+	pa2m_afirmar(encontrado == NULL, "No se encontro un elemento previo");
+	int numero2 = 15;
+	pa2m_afirmar(hashC_insertar(hash, "quince", &numero2, &encontrado),
+		     "Puedo insertar otro elemento en el hash");
+	numero = 20;
+	pa2m_afirmar(encontrado == NULL, "No se encontro un elemento previo");
+	pa2m_afirmar(hashC_insertar(hash, "diez", &numero, &encontrado),
+		     "Puedo insertar un elemento con clave repetida");
+	pa2m_afirmar(encontrado == &numero, "Se encontro el elemento previo");
+	pa2m_afirmar(hashC_cantidad(hash) == 2, "El hash tiene 1 elemento");
+	pa2m_afirmar(hashC_contiene(hash, "diez"),
+		     "El hash contiene la clave 'diez'");
+	pa2m_afirmar(*(int *)hashC_buscar(hash, "diez") == 20,
+		     "El elemento encontrado es el correcto");
+	int numero3 = 25;
+	pa2m_afirmar(hashC_insertar(hash, "veinticinco", &numero3, NULL),
+		     "Puedo insertar otro elemento en el hash");
+	int numero4 = 30;
+	pa2m_afirmar(hashC_insertar(hash, "treinta", &numero4, NULL),
+		     "Puedo insertar otro elemento en el hash");
+	int numero5 = 35;
+	pa2m_afirmar(hashC_insertar(hash, "treinta", &numero5, &encontrado),
+		     "Puedo insertar un elemento con clave repetida");
+	pa2m_afirmar(encontrado == &numero4, "Se encontro el elemento previo");
+	pa2m_afirmar(hashC_cantidad(hash) == 4, "El hash tiene 4 elementos");
+	int *elemento = hashC_borrar(hash, "diez");
+	pa2m_afirmar(*elemento == 20, "El elemento eliminado es el correcto");
+	hashC_destruir(hash, NULL);
+}
+
+void pruebasIteradorHashCerrado()
+{
+	hash_c_t *hash = hashC_crear(10);
+	int numero = 10;
+	hashC_insertar(hash, "diez", &numero, NULL);
+	int numero2 = 15;
+	hashC_insertar(hash, "quince", &numero2, NULL);
+	int numero3 = 20;
+	hashC_insertar(hash, "veinte", &numero3, NULL);
+	int numero4 = 25;
+	hashC_insertar(hash, "veinticinco", &numero4, NULL);
+	int numero5 = 30;
+	hashC_insertar(hash, "treinta", &numero5, NULL);
+	size_t cantidad = hashC_iterar(hash, imprimir_elemento_hash, NULL);
+	printf("\n");
+	pa2m_afirmar(cantidad == 5, "Se puede iterar el hash cerrado");
+	int *elemento = hashC_borrar(hash, "veinte");
+	pa2m_afirmar(*elemento == 20, "El elemento eliminado es el correcto");
+	cantidad = hashC_iterar(hash, imprimir_elemento_hash, NULL);
+	hashC_destruir(hash, NULL);
+}
+
 int main()
 {
 	pa2m_nuevo_grupo("Pruebas lista");
@@ -271,6 +333,8 @@ int main()
 	pruebasIteradorHashAbierto();
 	pa2m_nuevo_grupo("Pruebas hash cerrado");
 	pruebasHashCerrado();
+	printf("\n");
+	pruebasIteradorHashCerrado();
 
 	return pa2m_mostrar_reporte();
 }
