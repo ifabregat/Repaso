@@ -114,102 +114,100 @@ bool hashC_insertar(hash_c_t *hash, const char *clave, void *dato,
 	if (hash->cantidad / hash->capacidad >= 0.7)
 		rehashC(hash);
 
-    size_t pos = func_hashC(clave, hash->capacidad);
-    while (hash->estado[pos] == OCUPADO) {
-        if (strcmp(hash->claves[pos], clave) == 0) {
-            if (encontrado)
-                *encontrado = hash->datos[pos];
-            hash->datos[pos] = dato;
-            return true;
-        }
-        pos = probing_lineal(pos, hash->capacidad);
-    }
+	size_t pos = func_hashC(clave, hash->capacidad);
+	while (hash->estado[pos] == OCUPADO || hash->estado[pos] == BORRADO) {
+		if (hash->estado[pos] == OCUPADO &&
+		    strcmp(hash->claves[pos], clave) == 0) {
+			if (encontrado)
+				*encontrado = hash->datos[pos];
+			hash->datos[pos] = dato;
+			return true;
+		}
+		pos = probing_lineal(pos, hash->capacidad);
+	}
 
-    hash->claves[pos] = calloc(strlen(clave) + 1, sizeof(char));
-    if (!hash->claves[pos])
-        return false;
-    
-    strcpy(hash->claves[pos], clave);
+	hash->claves[pos] = calloc(strlen(clave) + 1, sizeof(char));
+	if (!hash->claves[pos])
+		return false;
 
-    hash->datos[pos] = dato;
-    hash->estado[pos] = OCUPADO;
-
-    hash->cantidad++;
+	strcpy(hash->claves[pos], clave);
+	hash->datos[pos] = dato;
+	hash->estado[pos] = OCUPADO;
+	hash->cantidad++;
 
 	return true;
 }
 
 void *hashC_buscar(const hash_c_t *hash, const char *clave)
 {
-    if (!hash || !clave)
-        return NULL;
+	if (!hash || !clave)
+		return NULL;
 
-    size_t pos = func_hashC(clave, hash->capacidad);
-    while (hash->estado[pos] != VACIO) {
-        if (hash->estado[pos] == OCUPADO &&
-            strcmp(hash->claves[pos], clave) == 0)
-            return hash->datos[pos];
+	size_t pos = func_hashC(clave, hash->capacidad);
+	while (hash->estado[pos] != VACIO) {
+		if (hash->estado[pos] == OCUPADO &&
+		    strcmp(hash->claves[pos], clave) == 0)
+			return hash->datos[pos];
+		pos = probing_lineal(pos, hash->capacidad);
+	}
 
-        pos = probing_lineal(pos, hash->capacidad);
-    }
-
-    return NULL;
+	return NULL;
 }
 
 bool hashC_contiene(const hash_c_t *hash, const char *clave)
 {
-    if (!hash || !clave)
-        return false;
+	if (!hash || !clave)
+		return false;
 
-    size_t pos = func_hashC(clave, hash->capacidad);
-    while (hash->estado[pos] != VACIO) {
-        if (hash->estado[pos] == OCUPADO &&
-            strcmp(hash->claves[pos], clave) == 0)
-            return true;
+	size_t pos = func_hashC(clave, hash->capacidad);
+	while (hash->estado[pos] != VACIO) {
+		if (hash->estado[pos] == OCUPADO &&
+		    strcmp(hash->claves[pos], clave) == 0)
+			return true;
 
-        pos = probing_lineal(pos, hash->capacidad);
-    }
+		pos = probing_lineal(pos, hash->capacidad);
+	}
 
-    return false;
+	return false;
 }
 
 void *hashC_borrar(hash_c_t *hash, const char *clave)
 {
-    if (!hash || !clave)
-        return NULL;
+	if (!hash || !clave)
+		return NULL;
 
-    size_t pos = func_hashC(clave, hash->capacidad);
-    while (hash->estado[pos] != VACIO) {
-        if (hash->estado[pos] == OCUPADO &&
-            strcmp(hash->claves[pos], clave) == 0) {
-            free(hash->claves[pos]);
-            hash->estado[pos] = BORRADO;
-            hash->cantidad--;
-            return hash->datos[pos];
-        }
+	size_t pos = func_hashC(clave, hash->capacidad);
+	while (hash->estado[pos] != VACIO) {
+		if (hash->estado[pos] == OCUPADO &&
+		    strcmp(hash->claves[pos], clave) == 0) {
+			free(hash->claves[pos]);
+			hash->estado[pos] = BORRADO;
+			hash->cantidad--;
+			return hash->datos[pos];
+		}
 
-        pos = probing_lineal(pos, hash->capacidad);
-    }
+		pos = probing_lineal(pos, hash->capacidad);
+	}
 
-    return NULL;
+	return NULL;
 }
 
 size_t hashC_iterar(const hash_c_t *hash,
-            bool (*f)(const char *, void *, void *), void *ctx)
+		    bool (*f)(const char *, void *, void *), void *ctx)
 {
-    if (!hash || !f)
-        return 0;
+	if (!hash || !f)
+		return 0;
 
-    size_t cantidad = 0;
-    for (size_t i = 0; i < hash->capacidad; i++) {
-        if (hash->estado[i] == OCUPADO) {
-            if (!f(hash->claves[i], hash->datos[i], ctx))
-                break;
-            cantidad++;
-        }
-    }
+	size_t cantidad = 0;
+	for (size_t i = 0; i < hash->capacidad; i++) {
+		if (hash->estado[i] == OCUPADO) {
+			if (!f(hash->claves[i], hash->datos[i], ctx))
+				break;
+			cantidad++;
+		}
+	}
 
-    return cantidad;
+	return cantidad;
 }
 
 void hashC_destruir(hash_c_t *hash, void destructor(void *))
@@ -224,10 +222,10 @@ void hashC_destruir(hash_c_t *hash, void destructor(void *))
 		}
 	}
 
-    for (size_t i = 0; i < hash->capacidad; i++) {
-        if (hash->estado[i] == OCUPADO)
-            free(hash->claves[i]);
-    }
+	for (size_t i = 0; i < hash->capacidad; i++) {
+		if (hash->estado[i] == OCUPADO)
+			free(hash->claves[i]);
+	}
 
 	free(hash->claves);
 	free(hash->datos);
