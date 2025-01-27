@@ -39,28 +39,26 @@ size_t func_hash(const char *clave, size_t capacidad)
 
 void rehash(hash_t *hash)
 {
-    size_t nueva_capacidad = hash->capacidad * 2;
+	size_t nueva_capacidad = hash->capacidad * 2;
 
-    nodoHA_t **nueva_tabla = calloc(nueva_capacidad, sizeof(nodoHA_t *));
-    if (!nueva_tabla)
-        return;
+	nodoHA_t **nueva_tabla = calloc(nueva_capacidad, sizeof(nodoHA_t *));
+	if (!nueva_tabla)
+		return;
 
-    for (size_t i = 0; i < hash->capacidad; i++)
-    {
-        nodoHA_t *nodo = hash->tabla[i];
-        while (nodo)
-        {
-            nodoHA_t *nodo_siguiente = nodo->siguiente;
-            size_t indice = func_hash(nodo->clave, nueva_capacidad);
-            nodo->siguiente = nueva_tabla[indice];
-            nueva_tabla[indice] = nodo;
-            nodo = nodo_siguiente;
-        }
-    }
+	for (size_t i = 0; i < hash->capacidad; i++) {
+		nodoHA_t *nodo = hash->tabla[i];
+		while (nodo) {
+			nodoHA_t *nodo_siguiente = nodo->siguiente;
+			size_t indice = func_hash(nodo->clave, nueva_capacidad);
+			nodo->siguiente = nueva_tabla[indice];
+			nueva_tabla[indice] = nodo;
+			nodo = nodo_siguiente;
+		}
+	}
 
-    free(hash->tabla);
-    hash->tabla = nueva_tabla;
-    hash->capacidad = nueva_capacidad;
+	free(hash->tabla);
+	hash->tabla = nueva_tabla;
+	hash->capacidad = nueva_capacidad;
 }
 
 bool hash_insertar(hash_t *hash, const char *clave, void *dato,
@@ -69,10 +67,9 @@ bool hash_insertar(hash_t *hash, const char *clave, void *dato,
 	if (!hash || !clave)
 		return false;
 
-    if (hash->cantidad / hash->capacidad >= 0.75)
-    {
-        rehash(hash);
-    }
+	if (hash->cantidad / hash->capacidad >= 0.75) {
+		rehash(hash);
+	}
 
 	size_t indice = func_hash(clave, hash->capacidad);
 
