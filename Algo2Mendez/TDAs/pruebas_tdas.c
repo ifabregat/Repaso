@@ -4,6 +4,7 @@
 #include "cola.h"
 #include "pila.h"
 #include "abb.h"
+#include "heap.h"
 #include "hash_a.h"
 #include "hash_c.h"
 
@@ -183,6 +184,51 @@ void pruebasIteradorABB()
 	abb_destruir(abb);
 }
 
+void pruebasHeap()
+{
+	heap_t *heap = heap_crear();
+	pa2m_afirmar(heap != NULL, "Puedo crear un heap");
+	pa2m_afirmar(heap_insertar(heap, 5), "Puedo insertar el 5");
+	pa2m_afirmar(heap->datos[0] == 5, "El tope es el 5");
+	pa2m_afirmar(heap_insertar(heap, 30), "Puedo insertar el 30");
+	pa2m_afirmar(heap->datos[0] == 30, "El tope es el 30");
+	pa2m_afirmar(heap_insertar(heap, 10), "Puedo insertar el 10");
+	pa2m_afirmar(heap->datos[0] == 30, "El tope sigue siendo 30");
+	pa2m_afirmar(heap_insertar(heap, 50), "Puedo insertar el 50");
+	pa2m_afirmar(heap->datos[0] == 50, "El tope es el 50");
+	int eliminado = heap_eliminar(heap);
+	pa2m_afirmar(eliminado == 50, "Pude eliminar el tope que es 50");
+	pa2m_afirmar(heap->datos[0] == 30, "El nuevo tope es 30");
+
+	heap->cantidad = 10;
+
+	for (int i = 0; i < heap->capacidad; i++) {
+		heap->datos[i] = rand() % 10;
+	}
+
+	for (int i = 0; i < heap->cantidad; i++) {
+		printf("%d  ", heap->datos[i]);
+	}
+
+	printf("\nHeapify: \n");
+
+	heapify(heap);
+
+	for (int i = 0; i < heap->cantidad; i++) {
+		printf("%d  ", heap->datos[i]);
+	}
+
+	printf("\nHeap sort: \n");
+
+	heap_sort(heap);
+
+	for (int i = 0; i < heap->capacidad; i++) {
+		printf("%d  ", heap->datos[i]);
+	}	
+
+	heap_destruir(heap);
+}
+
 void pruebasHashAbierto()
 {
 	hash_t *hash = hash_crear(10);
@@ -313,28 +359,30 @@ void pruebasIteradorHashCerrado()
 
 int main()
 {
-	pa2m_nuevo_grupo("Pruebas lista");
-	pruebasLista();
-	printf("\n");
-	pruebasListaNulos();
-	printf("\n");
-	pruebasIteradorLista();
-	pa2m_nuevo_grupo("Pruebas cola");
-	pruebasCola();
-	pa2m_nuevo_grupo("Pruebas pila");
-	pruebasPila();
-	pa2m_nuevo_grupo("Pruebas ABB");
-	pruebasABB();
-	printf("\n");
-	pruebasIteradorABB();
-	pa2m_nuevo_grupo("Pruebas hash abierto");
-	pruebasHashAbierto();
-	printf("\n");
-	pruebasIteradorHashAbierto();
-	pa2m_nuevo_grupo("Pruebas hash cerrado");
-	pruebasHashCerrado();
-	printf("\n");
-	pruebasIteradorHashCerrado();
+	// pa2m_nuevo_grupo("Pruebas lista");
+	// pruebasLista();
+	// printf("\n");
+	// pruebasListaNulos();
+	// printf("\n");
+	// pruebasIteradorLista();
+	// pa2m_nuevo_grupo("Pruebas cola");
+	// pruebasCola();
+	// pa2m_nuevo_grupo("Pruebas pila");
+	// pruebasPila();
+	// pa2m_nuevo_grupo("Pruebas ABB");
+	// pruebasABB();
+	// printf("\n");
+	// pruebasIteradorABB();
+	pa2m_nuevo_grupo("Pruebas Heap");
+	pruebasHeap();
+	// pa2m_nuevo_grupo("Pruebas hash abierto");
+	// pruebasHashAbierto();
+	// printf("\n");
+	// pruebasIteradorHashAbierto();
+	// pa2m_nuevo_grupo("Pruebas hash cerrado");
+	// pruebasHashCerrado();
+	// printf("\n");
+	// pruebasIteradorHashCerrado();
 
 	return pa2m_mostrar_reporte();
 }
