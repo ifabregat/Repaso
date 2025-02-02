@@ -1,35 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef unsigned char byte;
-
-void selectionsort(void *vector, size_t ml, size_t size,
-		   int (*cmp)(const void *, const void *))
+void selectionsort(int *vector, size_t ml)
 {
-	byte *v = (byte *)vector;
-
-	for (size_t i = 0; i < ml - 1; i++) {
+	for (size_t i = 0; i < ml; i++) {
 		size_t min = i;
-
 		for (size_t j = i + 1; j < ml; j++) {
-			if (cmp(v + j * size, v + min * size) < 0) {
+			if (vector[j] < vector[min]) {
 				min = j;
 			}
 		}
-
 		if (min != i) {
-			for (size_t j = 0; j < size; j++) {
-				byte temp = v[i * size + j];
-				v[i * size + j] = v[min * size + j];
-				v[min * size + j] = temp;
-			}
+			int temp = vector[i];
+			vector[i] = vector[min];
+			vector[min] = temp;
 		}
 	}
-}
-
-int cmp_int(const void *a, const void *b)
-{
-	return (*(int *)a - *(int *)b);
 }
 
 int main()
@@ -42,7 +28,7 @@ int main()
 		printf("%d ", vector[i]);
 	}
 
-	selectionsort(vector, ml, sizeof(int), cmp_int);
+	selectionsort(vector, ml);
 
 	printf("\nVector ordenado: ");
 	for (int i = 0; i < ml; i++) {

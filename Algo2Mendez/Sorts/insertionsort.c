@@ -1,29 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef unsigned char byte;
-
-void insertionsort(void *vector, size_t ml, size_t size,
-		   int (*cmp)(const void *, const void *))
+void insertionsort(int *vector, size_t ml)
 {
-	byte *v = (byte *)vector;
-
 	for (size_t i = 1; i < ml; i++) {
-		size_t j = i;
-		while (j > 0 && cmp(v + j * size, v + (j - 1) * size) < 0) {
-			for (size_t k = 0; k < size; k++) {
-				byte temp = v[j * size + k];
-				v[j * size + k] = v[(j - 1) * size + k];
-				v[(j - 1) * size + k] = temp;
-			}
+		int key = vector[i];
+		int j = i - 1;
+
+		while (j >= 0 && vector[j] > key) {
+			vector[j + 1] = vector[j];
 			j--;
 		}
-	}
-}
 
-int cmp_int(const void *a, const void *b)
-{
-	return (*(int *)a - *(int *)b);
+		vector[j + 1] = key;
+	}
 }
 
 int main()
@@ -36,7 +26,7 @@ int main()
 		printf("%d ", vector[i]);
 	}
 
-	insertionsort(vector, ml, sizeof(int), cmp_int);
+	insertionsort(vector, ml);
 
 	printf("\nVector ordenado: ");
 	for (int i = 0; i < ml; i++) {
